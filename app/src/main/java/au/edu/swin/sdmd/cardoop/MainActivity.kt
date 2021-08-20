@@ -10,18 +10,32 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val c = Card("ACE", "HEARTS")
+        //val c = Card("ACE", "HEARTS")
+        var c = Card(Rank.ACE, Suit.HEARTS)
 
-        val rankSuit = findViewById<TextView>(R.id.rank_suit)
-        rankSuit.text = c.getDetails()
+
+        update(c)
 
         val flip = findViewById<Button>(R.id.flip)
         flip.setOnClickListener {
             c.flip()
-            rankSuit.text = c.getDetails()
+            update(c)
+        }
+
+        val random = findViewById<Button>(R.id.random)
+        random.setOnClickListener {
+            c = Card()
+            update(c)
         }
 
 
 
+    }
+
+
+    fun update(card: Card)
+    {
+        val rankSuit = findViewById<TextView>(R.id.rank_suit)
+        rankSuit.text = card.getDetails()
     }
 }

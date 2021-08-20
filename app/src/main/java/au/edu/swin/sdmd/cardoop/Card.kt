@@ -1,6 +1,23 @@
 package au.edu.swin.sdmd.cardoop
 
-class Card(val rank: String, val suit: String, var faceUp: Boolean = true) {
+import kotlin.random.Random
+
+enum class Suit
+{
+    HEARTS, DIAMONDS, CLUBS, SPADES
+}
+
+enum class Rank
+{
+    ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING
+}
+
+class Card(var rank: Rank, var suit: Suit, var faceUp: Boolean = true) {
+    constructor(): this (
+        Rank.values()[Random.nextInt(0, 13)],
+        Suit.values()[Random.nextInt(0, 4)]
+    )
+
     fun flip() {
         faceUp = !faceUp
     }
@@ -15,7 +32,7 @@ class Card(val rank: String, val suit: String, var faceUp: Boolean = true) {
 
     fun getDetails():String {
         if (faceUp) {
-            return "$rank $suit"
+            return "$rank of $suit"
         } else {
             return "------"
         }
